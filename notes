@@ -1,0 +1,88 @@
+okay so here were the steps
+
+mkdir toy-project
+mkdir toy-project/wordpress
+mkdir toy-project/gatsby
+cd toy-project/wordpress
+yo wordpress
+point nginx to absolute path of wordpress api (1)
+(make a mysql database with the name you want? maybe yomen does this)
+go to localhost and fill out the form
+install acf, acf-to-rest-api, and custom-post-types-ui
+make a custom post type, and give it an acf
+make sure custom post type is set to expose to rest api
+cd ../toy-project/gastby
+gatsby new toy-front-end
+npm i -g gatsby gatsby-cli gatsby-source-wordpress
+in gatsby-config.js, add the good stuff (2)
+add graphql query to index.html to begin with (3)
+
+(1)
+/etc/nginx/sites-enabled/default says:
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server ipv6only=on;
+
+        root /home/dpcairns/localdev/toys;
+        index index.php index.html index.htm;
+
+        server_name localhost;
+
+        location / {
+            # try_files $uri $uri/ =404;
+            try_files $uri $uri/ /index.php?q=$uri&$args;
+            include  /etc/nginx/mime.types;
+        }
+
+        error_page 404 /404.html;
+
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+                root /usr/share/nginx/html;
+        }
+
+        location ~ \.php$ {
+                try_files $uri =404;
+                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                fastcgi_pass unix:/var/run/php5-fpm.sock;
+                fastcgi_index index.php;
+                include fastcgi_params;
+        }
+}
+
+
+(2)
+module.exports = {
+  siteMetadata: {
+    title: 'Gatsby Default Starter',
+  },
+  plugins: [
+    'gatsby-plugin-react-helmet',
+      {
+        resolve: `gatsby-source-wordpress`,
+        options: {
+          baseUrl: `localhost`,
+          hostingWPCOM: false,
+          useACF: true,
+      },
+    },
+  ],
+}
+
+
+
+(3)
+export const pageQuery = graphql`
+  query WOW {
+    allWordpressWpToy{
+      edges{
+        node{
+          title
+          acf{
+            description
+          }
+        }
+      }
+    }
+  }`;
+
