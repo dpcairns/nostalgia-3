@@ -26,7 +26,7 @@ const IndexPage = ({ data: {
         pets.map(pet => (
           <div className={styles.box} style={{background: 'lightblue'}}>
             <h1>{pet.node.title}</h1>
-            <h6>{pet.node.acf.description} </h6>
+            <h6>{pet.node.acf.description}</h6>
           </div>
         ))
       }
