@@ -38,7 +38,7 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query WOW {
-    allWordpressWpToy{
+    allWordpressToy{
       edges{
         node{
           title
@@ -48,7 +48,7 @@ export const pageQuery = graphql`
         }
       }
     }
-      allWordpressWpPet{
+      allWordpressPet{
       edges{
         node{
           title

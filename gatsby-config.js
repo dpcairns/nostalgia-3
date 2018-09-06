@@ -10,7 +10,7 @@ module.exports = {
           baseUrl: `46.101.187.207`,
           protocol: `http`,
           hostingWPCOM: false,
-          useACF: false,
+          useACF: true,
       },
     },
   ],
