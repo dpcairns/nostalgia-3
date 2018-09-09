@@ -14,7 +14,7 @@ const IndexPage = ({ data: {
     <div className={styles.toys}>
       {
         toys.map(toy => (
-          <div className={styles.box} style={{background: 'lightpink'}}>
+          <div className={styles.box} style={{background: 'rebeccapurple'}}>
             <h1>{toy.node.title}</h1>
             <h6>{toy.node.acf.description}</h6>
           </div>
@@ -24,7 +24,7 @@ const IndexPage = ({ data: {
     <div className={styles.pets}>
       {
         pets.map(pet => (
-          <div className={styles.box} style={{background: 'lightblue'}}>
+          <div className={styles.box} style={{background: 'lightgreen'}}>
             <h1>{pet.node.title}</h1>
             <h6>{pet.node.acf.description} </h6>
           </div>
